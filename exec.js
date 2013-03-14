@@ -11,8 +11,11 @@ var lineReader = require('line-reader');
 var fs = require('fs');
 var user = 'pomelo';
 var keyFile = '/home/yph/.ssh/id_rsa';
+
 var port = 1046;
+
 var clients = {};
+
 lineReader.eachLine('./ip', function(host, last) {
   (function(host) {
     var c = new Connection();
