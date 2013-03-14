@@ -1,0 +1,12 @@
+{
+  "name": "batch-utils",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+    "ssh2": ">=0.1.13",
+    "line-reader": ">=0.2.3",
+  },
+  "devDependencies": {
+  }
+}
+
