@@ -2,14 +2,7 @@ var Connection = require('ssh2');
 var rl = require('readline'),
     sys = require('sys');
 
-var args = process.argv;
-var ipFile = args[2] || './ip';
-var user  = args[3] || 'pomelo';
-var port = args[4] || 1046;
-var keyFile = args[5] || '/home/yph/.ssh/id_rsa';
-var passphrase = args[6] || '';
-
-console.error('ipFile=%j user=%j port=%j keyFile=%j',ipFile,user,port,keyFile);
+var Config = require('./readconfig');
 
 process.stdin.setEncoding('utf8');
 
@@ -20,8 +13,7 @@ var fs = require('fs');
 
 var clients = {};
 
-lineReader.eachLine(ipFile, function(host, last) {
-  (function(host) {
+var connect = function(host,config) {
     var c = new Connection();
     c.on('connect', function() {
       //console.log(host + ':: connect');
@@ -42,15 +34,14 @@ lineReader.eachLine(ipFile, function(host, last) {
       delete clients[c];
     });
     c.connect({host: host,
-      port: port,
-      username: user,
-      passphrase:passphrase,
-      privateKey: fs.readFileSync(keyFile)
+      port: config.port,
+      username: config.user,
+      passphrase:config.passphrase || '' ,
+      privateKey: fs.readFileSync(config.keyFile)
     });
-  })(host);
-}).then(function(){
-
-});
+};
+ 
+Config.do(connect);
 
 
 lines.on('line', function(chunk) {
@@ -68,8 +59,6 @@ lines.on('close', function () {
     sys.puts('process end.');
     process.exit(0);
 });
- 
- 
 
 var exec = function(chunk) {
   chunk = "source .profile && " + chunk;
@@ -91,12 +80,13 @@ var exec = function(chunk) {
           lines.prompt();
         });
         stream.on('end', function() {
+          lines.prompt();
         });
         stream.on('close', function() {
+          lines.prompt();
         });
         stream.on('exit', function(code, signal) {
-        //console.log(host + ' Stream :: exit :: code: ' + code + ', signal: ' + signal);
-        //c.end();
+          lines.prompt();
       });
       });
     })(c,host);

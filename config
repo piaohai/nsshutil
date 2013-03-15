@@ -1,0 +1,7 @@
+ipFile=./ip
+keyFile=/home/yph/.ssh/id_rsa
+user=pomelo
+port=1046
+
+src=/home/yph/workspace/pomelowork/push-load
+dest=/home/pomelo
