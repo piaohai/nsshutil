@@ -7,6 +7,7 @@ var ipFile = args[2] || './ip';
 var user  = args[3] || 'pomelo';
 var port = args[4] || 1046;
 var keyFile = args[5] || '/home/yph/.ssh/id_rsa';
+var passphrase = args[6] || '';
 
 console.error('ipFile=%j user=%j port=%j keyFile=%j',ipFile,user,port,keyFile);
 
@@ -43,6 +44,7 @@ lineReader.eachLine(ipFile, function(host, last) {
     c.connect({host: host,
       port: port,
       username: user,
+      passphrase:passphrase,
       privateKey: fs.readFileSync(keyFile)
     });
   })(host);
