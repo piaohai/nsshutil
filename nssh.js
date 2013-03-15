@@ -1,7 +1,14 @@
 var Connection = require('ssh2');
-
 var rl = require('readline'),
     sys = require('sys');
+
+var args = process.argv;
+var ipFile = args[2] || './ip';
+var user  = args[3] || 'pomelo';
+var port = args[4] || 1046;
+var keyFile = args[5] || '/home/yph/.ssh/id_rsa';
+
+console.error('ipFile=%j user=%j port=%j keyFile=%j',ipFile,user,port,keyFile);
 
 process.stdin.setEncoding('utf8');
 
@@ -9,14 +16,10 @@ var lines = rl.createInterface(process.stdin, process.stdout, null);
 lines.setPrompt('>:');
 var lineReader = require('line-reader');
 var fs = require('fs');
-var user = 'pomelo';
-var keyFile = '/home/yph/.ssh/id_rsa';
-
-var port = 1046;
 
 var clients = {};
 
-lineReader.eachLine('./ip', function(host, last) {
+lineReader.eachLine(ipFile, function(host, last) {
   (function(host) {
     var c = new Connection();
     c.on('connect', function() {
@@ -40,7 +43,7 @@ lineReader.eachLine('./ip', function(host, last) {
     c.connect({host: host,
       port: port,
       username: user,
-      privateKey: require('fs').readFileSync(keyFile)
+      privateKey: fs.readFileSync(keyFile)
     });
   })(host);
 }).then(function(){

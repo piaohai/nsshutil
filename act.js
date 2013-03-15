@@ -4,9 +4,6 @@ var lineReader = require('line-reader');
 var fs = require('fs');
 var arg = process.argv[2] || 'start';
 
-fs.appendFile('/tmp/log','sss','utf8');
-return;
-
 lineReader.eachLine('./ip', function(host, last) {
   (function(host) {
     var req = http.request({host:host, port:8890,path: '/'+arg, agent:false});
