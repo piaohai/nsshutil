@@ -1,11 +1,10 @@
 var http = require('http');
 
-var lineReader = require('line-reader');
-var fs = require('fs');
+var Config = require('./preconfig');
+
 var arg = process.argv[2] || 'start';
 
-lineReader.eachLine('./ip', function(host, last) {
-  (function(host) {
+var act = function(host) {
     var req = http.request({host:host, port:8890,path: '/'+arg, agent:false});
 
     req.setNoDelay();
@@ -25,7 +24,6 @@ lineReader.eachLine('./ip', function(host, last) {
       console.log(error);
     });
     req.end();
-  })(host);
-}).then(function(){
+};
 
-});
+Config.do(act);

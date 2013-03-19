@@ -1,4 +1,4 @@
-var Config = require('./readconfig');
+var Config = require('./preconfig');
 
 var sync = function (host, config) { 
    console.log(host);

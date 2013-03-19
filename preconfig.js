@@ -15,10 +15,10 @@ Config.prototype.init = function() {
       config[vals[0]]=vals[1];
     }
   }
-
+  var ipFile = process.argv[2] || config.ipFile;
   this.ips = [];
   var duplicate = {};
-  configStr=fs.readFileSync(config.ipFile,"utf8").toString().split("\n");;
+  configStr=fs.readFileSync(ipFile,"utf8").toString().split("\n");;
   for (var i in configStr){
     var line = configStr[i];
     if (!!line){
