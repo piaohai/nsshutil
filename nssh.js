@@ -27,20 +27,20 @@ var connect = function(host,config) {
         stream.on('data', function(data, extended) {
           var tdata = data+'';
           //console.log(data);
-          console.log(tdata);
+          //console.log(tdata);
           if (!tdata) return;
-          //lines.prompt();
-          //console.log('------------' + host + ' ----------');
+          lines.prompt();
+          console.log('------------' + host + ' ----------');
           //if (tdata!==last){
             if (!firstMap[host])
              {
               if (!!tdata) {
-                //console.log(tdata);
+                console.log(tdata);
               }
             }
             //last = tdata;
           //} 
-          //lines.prompt();
+          lines.prompt();
           firstMap[host] = false;
         });
         stream.on('end', function() {
@@ -76,9 +76,9 @@ var connect = function(host,config) {
       passphrase:config.passphrase || '' ,
       tryKeyboard: true,
       debug: function (msg) {
-        console.log('Connection: ' + msg);
+        //console.log('Connection: ' + msg);
       },
-      privateKey: fs.readFileSync(config.keyFile)
+      privateKey: fs.readFileSync(config.keyFile) || ''
     });
 };
  

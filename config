@@ -1,7 +1,8 @@
 ipFile=./ip
-keyFile=/home/yph/.ssh/id_rsa
+keyFile=/home/yaopiaohai/.ssh/id_rsa
 user=pomelo
 port=1046
 
-src=/home/yph/workspace/pomelowork/lordofpomelo/game-server/bin/shutdown.sh
+src=/home/yaopiaohai/workspace/pomelowork/lordofpomelo/game-server/bin/shutdown.sh
 dest=/home/pomelo
+exclude=logs

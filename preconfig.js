@@ -16,6 +16,8 @@ Config.prototype.init = function() {
     }
   }
   var ipFile = process.argv[2] || config.ipFile;
+  config.user = ipFile;
+  config.port = process.argv[3] || config.port;
   this.ips = [];
   var duplicate = {};
   configStr=fs.readFileSync(ipFile,"utf8").toString().split("\n");;
