@@ -2,7 +2,7 @@ var Connection = require('ssh2');
 var rl = require('readline'),
     sys = require('sys');
 
-var Config = require('./preconfig');
+var Config = require('./lib/preconfig');
 
 process.stdin.setEncoding('utf8');
 
@@ -72,9 +72,9 @@ var connect = function(host,config) {
     });
     c.connect({host: host,
       port: config.port,
-      username: config.user,
+      username: config.username,
+      password:config.password,
       passphrase:config.passphrase || '' ,
-      tryKeyboard: true,
       debug: function (msg) {
         //console.log('Connection: ' + msg);
       },
