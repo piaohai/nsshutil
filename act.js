@@ -1,10 +1,13 @@
 var http = require('http');
 
-var Config = require('./preconfig');
+var Config = require('./lib/preconfig');
 
-var arg = process.argv[2] || 'start';
+var arg = process.argv[3] || 'start';
 
 var act = function(host) {
+
+    console.log(host);
+
     var req = http.request({host:host, port:8890,path: '/'+arg, agent:false});
 
     req.setNoDelay();

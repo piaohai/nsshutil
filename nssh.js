@@ -1,16 +1,19 @@
 var Connection = require('ssh2');
 var rl = require('readline'),
     sys = require('sys');
+var fs = require('fs');
 
 var Config = require('./lib/preconfig');
 
 process.stdin.setEncoding('utf8');
 
+var publicKey = fs.readFileSync(Config.config.publicKey) || '';
+var privateKey = fs.readFileSync(Config.config.privateKey) || '';
+
 var firstMap = {};
 
 var lines = rl.createInterface(process.stdin, process.stdout, null);
 lines.setPrompt('>:');
-var fs = require('fs');
 
 var clients = {};
 
@@ -44,41 +47,34 @@ var connect = function(host,config) {
           firstMap[host] = false;
         });
         stream.on('end', function() {
-          console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
         });
         stream.on('close', function() {
-          console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
           lines.prompt();
         });
         clients[host] = stream;
         stream.on('exit', function(code, signal) {
-            console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
         });
       });
       lines.prompt();
     });
     c.on('error', function(err) {
       console.log(host + ' Connection :: error :: ' + err);
-      console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
     });
     c.on('end', function() {
       console.log('Connection :: end');
-      console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
     });
     c.on('close', function(had_error) {
       console.log(host + ' Connection :: close');
-      console.log('enddddddddddddddddddddddddddddddddddddddddddddd');
       delete clients[c];
     });
     c.connect({host: host,
       port: config.port,
       username: config.username,
-      password:config.password,
       passphrase:config.passphrase || '' ,
       debug: function (msg) {
         //console.log('Connection: ' + msg);
       },
-      privateKey: fs.readFileSync(config.keyFile) || ''
+      privateKey: privateKey
     });
 };
  
