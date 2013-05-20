@@ -2,7 +2,7 @@
 *.log
 */node-log.log
 logs/*.log
-data/*
+data/*.prod
 !.gitignore
 node_modules/*
 .project
