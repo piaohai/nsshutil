@@ -4,7 +4,7 @@ Make a ssh batch login with nodejs.
 
 ### Install
 
-    git clone 
+    git clone source the npm install 
 
 ### Usage
 

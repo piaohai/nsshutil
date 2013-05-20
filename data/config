@@ -1,0 +1,10 @@
+ipFile=test
+privateKey=/home/yaopiaohai/.ssh/id_rsa
+publicKey=/home/yaopiaohai/.ssh/id_rsa.pub
+username=yaopiaohai
+destname=space
+port=1046
+
+src=/home/yaopiaohai/workspace/pomelowork/push-load/
+dest=/home/pomelo/push-load/
+exclude=logs
