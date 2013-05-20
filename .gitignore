@@ -12,6 +12,5 @@ node_modules/*
 *.sublime-project
 *.sublime-workspace
 *.swp
-config
 .DS_Store
 .idea

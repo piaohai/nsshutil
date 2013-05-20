@@ -1,6 +1,6 @@
 ===
 
-Make a ssh batch login.
+Make a ssh batch login with nodejs.
 
 ### Install
 
