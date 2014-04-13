@@ -1,10 +1,10 @@
 ipFile=test
-privateKey=/home/yaopiaohai/.ssh/id_rsa
-publicKey=/home/yaopiaohai/.ssh/id_rsa.pub
-username=yaopiaohai
-destname=space
-port=1046
+privateKey=/home/ubuntu/.ssh/id_rsa
+publicKey=/home/ubuntu/.ssh/id_rsa.pub
+username=ubuntu
+destname=ubuntu
+port=22
 
-src=/home/yaopiaohai/workspace/pomelowork/push-load/
-dest=/home/pomelo/push-load/
+src=/home/ubuntu/push-load/
+dest=/home/ubuntu/push-load/
 exclude=logs
